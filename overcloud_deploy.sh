@@ -9,3 +9,6 @@ openstack overcloud deploy \
 --ntp-server clock.redhat.com \
 --libvirt-type kvm
 
+rm -rf /home/stack/overcloudrc 2>/dev/null
+ln -s -T $PWD/overcloudrc /home/stack/overcloudrc
+

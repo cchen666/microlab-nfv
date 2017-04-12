@@ -71,7 +71,7 @@ parameter_defaults:
   #NeutronNetworkType: 'vlan'
   NeutronNetworkType: 'vxlan'
   # The OVS logical->physical bridge mappings to use.
-  NeutronBridgeMappings: 'datacentre:br-ex,dpdk0:br-link0,dpdk1:br-link1,access:br-p2p1'
+  NeutronBridgeMappings: 'dpdk0:br-link0,dpdk1:br-link1,access:br-p2p1'
   NeutronNetworkVLANRanges: 'dpdk0:100:200,dpdk1:100:200,access:100:200'
   #NeutronNetworkVXLANRanges: 'dpdk0:100:200,dpdk1:100:200,access:100:200'
   # The Neutron ML2 and OpenVSwitch vlan mapping range to support.
