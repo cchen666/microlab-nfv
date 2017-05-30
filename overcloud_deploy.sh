@@ -22,6 +22,8 @@ rm -rf /home/stack/overcloudrc 2>/dev/null
 ln -s -T $PWD/overcloudrc /home/stack/overcloudrc
 
 echo "modify /etc/hosts entry"
+sudo sed -i -r '/compute/d' /etc/hosts
+sudo sed -i -r '/controller/d' /etc/hosts
 nova list | sed -r -n 's/.*(compute-[0-9]+).*ctlplane=([0-9.]+).*/\2 \1/p' | sudo tee --append /etc/hosts >/dev/null
 nova list | sed -r -n 's/.*(controller-[0-9]+).*ctlplane=([0-9.]+).*/\2 \1/p' | sudo tee --append /etc/hosts >/dev/null
 
@@ -39,5 +41,6 @@ EOF
 
 # update authorized ssh key on nodes
 echo "update authorized ssh key on nodes"
-ansible all -i nodes -m shell -a "> /root/.ssh/authorized_keys; echo $(sudo cat /home/stack/.ssh/id_rsa.pub) >> /root/.ssh/authorized_keys; echo $(sudo cat /root/.ssh/id_rsa.pub) >> /root/.ssh/authorized_keys"
+ANSIBLE_HOST_KEY_CHECKING=False UserKnownHostsFile=/dev/null ansible all -i nodes -m shell -a "> /root/.ssh/authorized_keys; echo $(sudo cat /home/stack/.ssh/id_rsa.pub) >> /root/.ssh/authorized_keys; echo $(sudo cat /root/.ssh/id_rsa.pub) >> /root/.ssh/authorized_keys"
 ansible all -i nodes -m lineinfile -a "name=/etc/ssh/sshd_config regexp='^UseDNS' line='UseDNS no'"
+ansible all -i nodes -m service -a "name=sshd state=restarted"
