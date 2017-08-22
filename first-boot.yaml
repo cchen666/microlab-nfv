@@ -136,6 +136,8 @@ resources:
               yum install -y tuned-profiles-cpu-partitioning
 
               tuned_conf_path="/etc/tuned/cpu-partitioning-variables.conf"
+              echo "isolated_cores=2" > $tuned_conf_path
+              tuned-adm profile cpu-partitioning
               if [ -n "$TUNED_CORES" ]; then
                 grep -q "^isolated_cores" $tuned_conf_path
                 if [ "$?" -eq 0 ]; then
