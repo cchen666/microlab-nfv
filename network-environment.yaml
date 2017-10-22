@@ -117,10 +117,10 @@ parameter_defaults:
   ## NeutronDpdkCoreList and NeutronDpdkMemoryChannels are REQUIRED settings.
   ## Attempting to deploy DPDK without appropriate values will cause deployment to fail or lead to unstable deployments.
   #HostCpusList: "'1,3,5,7,9,11,13,15,17,19'"
-  HostCpusList: "2,4,6,8,10,12,26,28,30,32,34,36"
+  HostCpusList: "2,4,6,8,10,12,14,26,28,30,32,34,36,38"
   # List of cores to be used for DPDK Poll Mode Driver
   #NeutronDpdkCoreList: "'0,1'"
-  NeutronDpdkCoreList: "'1,2,3,4,6,26,28,30'"
+  NeutronDpdkCoreList: "'1,2,3,4,6,14,26,28,30,38'"
   # Number of memory channels to be used for DPDK
   NeutronDpdkMemoryChannels: "4"
   # NeutronDpdkSocketMemory
